@@ -1,30 +1,48 @@
 /* =========================================================
-   Enoteca — sistema di design "vetro di bottiglia"
+   Bar Garda — sistema di design ispirato al menu Vinicola23
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-  --bg: #16241c;
-  --bg-elevated: #1e2f24;
-  --bg-elevated-2: #24382b;
-  --line: #2f4636;
-  --burgundy: #7a2333;
-  --burgundy-bright: #9c3247;
-  --gold: #c9a227;
-  --gold-soft: #d8bd6a;
-  --parchment: #ede4d3;
-  --parchment-dim: #b9b3a2;
-  --muted: #8fa396;
-  --ink-red: #a32638;
+  --bg: #0a0a0a;
+  --bg-elevated: #161513;
+  --bg-elevated-2: #1f1e1a;
+  --line: #333029;
+  --gold: #c9a361;
+  --gold-soft: #e0c07f;
+  --parchment: #f5f1e8;
+  --parchment-dim: #b3ada0;
+  --muted: #8a857a;
+  --ink-red: #b23a3a;
 
   --dot-bianco: #e8d9a0;
-  --dot-bollicine: #d4af37;
-  --dot-rosso: #7a1f2b;
+  --dot-bollicine: #f0d78c;
+  --dot-rosso: #8a2a2a;
 
   --radius: 10px;
-  --font-display: 'Fraunces', 'Iowan Old Style', serif;
+  --font-script: 'Alex Brush', cursive;
+  --font-sans: 'Montserrat', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Tema chiaro: sovrascrive le variabili quando <html data-theme="light"> */
+[data-theme="light"] {
+  --bg: #faf7f0;
+  --bg-elevated: #ffffff;
+  --bg-elevated-2: #f1ece0;
+  --line: #ddd6c4;
+  --gold: #8a6414;
+  --gold-soft: #6f5312;
+  --parchment: #201d16;
+  --parchment-dim: #63594a;
+  --muted: #7a715f;
+  --ink-red: #a32638;
+}
+
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,163,97,0.10), transparent 60%);
 }
 
 * { box-sizing: border-box; }
@@ -34,13 +52,34 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--parchment);
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   -webkit-tap-highlight-color: transparent;
+  transition: background .2s ease, color .2s ease;
+}
+
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.theme-toggle {
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  color: var(--parchment-dim);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 body {
   background-image:
-    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(122,35,51,0.25), transparent 60%);
+    radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,163,97,0.14), transparent 60%);
   min-height: 100vh;
 }
 
@@ -50,10 +89,19 @@ body {
   padding: 24px 18px 64px;
 }
 
+/* ---------- Cornice ---------- */
+.menu-frame {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 26px 16px 18px;
+  margin-bottom: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 45%);
+}
+
 /* ---------- Header ---------- */
 .site-header {
   text-align: center;
-  padding: 12px 0 22px;
+  padding: 4px 0 22px;
   border-bottom: 1px solid var(--line);
   margin-bottom: 18px;
 }
@@ -61,18 +109,17 @@ body {
 .site-header .eyebrow {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  letter-spacing: 0.14em;
   color: var(--gold-soft);
 }
 
 .site-header h1 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-style: italic;
-  font-size: clamp(32px, 9vw, 44px);
-  margin: 6px 0 4px;
-  color: var(--parchment);
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(48px, 15vw, 76px);
+  margin: 0 0 2px;
+  color: var(--gold);
+  line-height: 1;
 }
 
 .site-header p {
@@ -84,34 +131,32 @@ body {
 /* ---------- Filter pills (tipologia) ---------- */
 .filters {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  gap: 7px;
   padding: 4px 2px 18px;
-  scrollbar-width: none;
 }
-.filters::-webkit-scrollbar { display: none; }
 
 .pill {
   flex: 0 0 auto;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--bg-elevated);
   color: var(--parchment-dim);
   font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.03em;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
-.pill .dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
 .pill.active {
-  background: var(--burgundy);
-  color: var(--parchment);
-  border-color: var(--burgundy-bright);
+  background: var(--gold);
+  color: #14120d;
+  border-color: var(--gold-soft);
 }
 
 /* ---------- Section group ---------- */
@@ -123,8 +168,7 @@ body {
   color: var(--gold-soft);
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 .group-title .dot { width: 9px; height: 9px; border-radius: 50%; }
 .group-title::after {
@@ -146,8 +190,8 @@ body {
 }
 
 .wine-name {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16.5px;
+  font-weight: 700;
   white-space: nowrap;
   color: var(--parchment);
 }
@@ -162,10 +206,10 @@ body {
 
 .wine-price {
   font-family: var(--font-mono);
-  font-size: 15.5px;
+  font-size: 15px;
   color: var(--gold);
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .wine-row.sold-out .wine-name,
@@ -181,10 +225,10 @@ body {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   padding: 2px 7px;
   border-radius: 4px;
-  background: rgba(163, 38, 56, 0.06);
+  background: rgba(178, 58, 58, 0.06);
   pointer-events: none;
 }
 
@@ -217,8 +261,7 @@ label {
   display: block;
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--parchment-dim);
   margin-bottom: 5px;
 }
@@ -230,7 +273,7 @@ input, select {
   color: var(--parchment);
   border-radius: 8px;
   padding: 11px 12px;
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: 16px;
   margin-bottom: 14px;
 }
@@ -251,8 +294,8 @@ button {
 }
 button:active { transform: scale(0.97); }
 
-.btn-primary { background: var(--burgundy); color: var(--parchment); width: 100%; }
-.btn-primary:hover { filter: brightness(1.12); }
+.btn-primary { background: var(--gold); color: #14120d; font-weight: 700; width: 100%; }
+.btn-primary:hover { filter: brightness(1.08); }
 
 .btn-ghost {
   background: transparent;
@@ -309,12 +352,15 @@ button:active { transform: scale(0.97); }
   justify-content: center;
   padding: 24px;
 }
-.gate .card { width: 100%; max-width: 360px; }
+.gate .card { width: 100%; max-width: 360px; text-align: center; }
 .gate h2 {
-  font-family: var(--font-display);
-  font-style: italic;
-  margin-top: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 34px;
+  color: var(--gold);
+  margin: 0 0 12px;
 }
+.gate label, .gate input, .gate .hint, .gate button { text-align: left; }
 .hint {
   color: var(--muted);
   font-size: 12.5px;
@@ -329,9 +375,10 @@ button:active { transform: scale(0.97); }
   margin-bottom: 18px;
 }
 .admin-header h1 {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 26px;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 40px;
+  color: var(--gold);
   margin: 0;
 }
 .link-small {
@@ -364,11 +411,12 @@ button:active { transform: scale(0.97); }
   gap: 8px;
 }
 .wine-card-title .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
-.wine-card-title span { font-size: 16.5px; }
+.wine-card-title span { font-size: 16px; font-weight: 700; }
 .wine-card-price {
   font-family: var(--font-mono);
   color: var(--gold);
   font-size: 15px;
+  font-weight: 600;
 }
 .wine-card-bottom {
   display: flex;
@@ -378,7 +426,7 @@ button:active { transform: scale(0.97); }
 .badge-esaurito {
   font-family: var(--font-mono);
   font-size: 10.5px;
-  letter-spacing: .1em;
+  letter-spacing: .05em;
   color: var(--ink-red);
   border: 1px solid var(--ink-red);
   padding: 2px 7px;
@@ -392,20 +440,20 @@ button:active { transform: scale(0.97); }
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--burgundy);
-  color: var(--parchment);
+  background: var(--gold);
+  color: #14120d;
   font-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
   z-index: 40;
 }
 
 .sheet-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.6);
   display: none;
   align-items: flex-end;
   z-index: 60;
@@ -421,13 +469,80 @@ button:active { transform: scale(0.97); }
   overflow-y: auto;
 }
 .sheet h3 {
-  font-family: var(--font-display);
-  font-style: italic;
-  margin-top: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--gold);
+  margin: 0 0 12px;
 }
 
 .row-2 { display: flex; gap: 10px; }
 .row-2 > * { flex: 1; }
+
+.print-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+.print-buttons button {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  color: var(--parchment-dim);
+}
+
+/* Area usata solo in stampa/PDF, invisibile a schermo */
+#print-area { display: none; }
+
+@media print {
+  body * { visibility: hidden; }
+  #print-area, #print-area * { visibility: visible; }
+  #print-area {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    background: #fff;
+    color: #201a12;
+  }
+  #print-area .print-title {
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: 32px;
+    color: #8a6414;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  #print-area .print-sub {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #6b6151;
+    margin-bottom: 18px;
+  }
+  #print-area .print-group {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin: 16px 0 6px;
+    border-bottom: 1px solid #ccc2a8;
+    padding-bottom: 3px;
+  }
+  #print-area .print-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 3px 0;
+    font-weight: 600;
+  }
+  #print-area .print-row .qty {
+    color: #6b6151;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    margin-left: 8px;
+    font-weight: 400;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }

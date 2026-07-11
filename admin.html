@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enoteca — Gestione</title>
+<title>Bar Garda — Gestione</title>
 <link rel="stylesheet" href="style.css">
 <meta name="robots" content="noindex, nofollow">
 </head>
@@ -44,9 +44,21 @@
 <!-- App gestione -->
 <div class="wrap" id="app" style="display:none;">
 
+  <div class="header-top">
+    <button class="theme-toggle" id="btn-tema">Chiaro</button>
+  </div>
+
   <div class="admin-header">
-    <h1>Cantina</h1>
+    <div>
+      <div class="eyebrow" style="font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--gold-soft); margin-bottom:2px;">Bar Garda</div>
+      <h1>Cantina</h1>
+    </div>
     <a href="#" class="link-small" id="btn-disconnetti">Esci</a>
+  </div>
+
+  <div class="print-buttons">
+    <button id="btn-stampa-pubblico">Stampa PDF (carta clienti)</button>
+    <button id="btn-stampa-interno">Stampa PDF (con quantità)</button>
   </div>
 
   <nav class="filters" id="filters"></nav>
@@ -54,6 +66,9 @@
   <div id="lista"></div>
 
 </div>
+
+<!-- Area usata solo per la stampa/salvataggio PDF -->
+<div id="print-area"></div>
 
 <button class="fab" id="fab-aggiungi" style="display:none;" aria-label="Aggiungi vino">+</button>
 

@@ -50,6 +50,29 @@ function base64ToUtf8(b64) {
   return new TextDecoder().decode(bytes);
 }
 
+// ---------- Tema chiaro/scuro ----------
+
+const THEME_KEY = "enoteca_theme";
+
+function getTheme() {
+  return localStorage.getItem(THEME_KEY) || "dark";
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+function initTheme() {
+  applyTheme(getTheme());
+}
+
+function toggleTheme() {
+  const nuovo = getTheme() === "dark" ? "light" : "dark";
+  applyTheme(nuovo);
+  return nuovo;
+}
+
 // ---------- Config repo GitHub (salvata in localStorage sul telefono) ----------
 
 const GH_CONFIG_KEY = "enoteca_gh_config";

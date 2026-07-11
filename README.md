@@ -1,4 +1,4 @@
-# Enoteca — sito lista vini
+# Bar Garda — sito lista vini
 
 Sito statico in due pagine:
 
@@ -39,7 +39,7 @@ Questi dati restano salvati **solo nel browser di quel telefono** (localStorage)
 
 ## 3. Cambiare la password di gestione
 
-La password di default è **`xxxxx`**. Per cambiarla:
+La password di default è **`vino2026`**. Per cambiarla:
 
 1. Apri `admin.html` nel browser del computer.
 2. Apri la Console sviluppatore (F12 o tasto destro → Ispeziona → Console).
@@ -57,6 +57,20 @@ La password di default è **`xxxxx`**. Per cambiarla:
 - Usa **−** / **+** per scalare o aggiungere bottiglie: a quantità 0 il vino compare automaticamente come "Esaurito" nella carta pubblica.
 - **Modifica** cambia nome/tipo/prezzo/quantità di un vino esistente; **Elimina** lo rimuove del tutto.
 - **Esci** in alto a destra richiede di nuovo la password (utile se il telefono viene prestato).
+
+## 5. Aspetto grafico e marchio
+
+Lo stile (nero, oro, script per il titolo "Bar Garda", Montserrat per i testi) è ispirato al menu che ci hai mandato come riferimento. Il sito parte sempre in **modalità scura**; il pulsante in alto a destra passa alla modalità chiara.
+
+L'emblema circolare in cima alla pagina pubblica e nella schermata di accesso è disegnato direttamente nell'HTML (tag `<svg>` dentro `index.html` e `admin.html`). Le scritte "WINE & TASTE" e "SUL GARDA" sono un segnaposto: puoi cambiarle aprendo il file con un editor di testo e modificando il contenuto dei tag `<textPath>` e `<text>` corrispondenti, senza bisogno di programmi di grafica.
+
+## 6. Stampa PDF
+
+Nella pagina di gestione trovi due pulsanti:
+- **Stampa PDF (carta clienti)** — nome, tipologia e prezzo, come la vede il cliente.
+- **Stampa PDF (con quantità)** — stessa lista con anche le bottiglie rimaste in cantina, per uso interno.
+
+Entrambi aprono la finestra di stampa del browser: scegliendo come stampante "Salva come PDF" (o "Salva in PDF") si ottiene direttamente il file.
 
 ## Struttura dei file
 

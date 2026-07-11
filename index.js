@@ -5,6 +5,19 @@
 let TUTTI_I_VINI = [];
 let FILTRO_ATTIVO = "Tutti";
 
+function aggiornaLabelTema() {
+  document.getElementById("btn-tema").textContent = getTheme() === "dark" ? "Chiaro" : "Scuro";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  aggiornaLabelTema();
+  document.getElementById("btn-tema").addEventListener("click", () => {
+    toggleTheme();
+    aggiornaLabelTema();
+  });
+});
+
 async function caricaVini() {
   try {
     const res = await fetch("data/wines.json?t=" + Date.now(), { cache: "no-store" });

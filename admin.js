@@ -25,7 +25,21 @@ window.hashPassword = hashPassword; // disponibile in console per generare nuovi
 
 // ---------- Avvio ----------
 
+function aggiornaLabelTema() {
+  document.getElementById("btn-tema").textContent = getTheme() === "dark" ? "Chiaro" : "Scuro";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  aggiornaLabelTema();
+  document.getElementById("btn-tema").addEventListener("click", () => {
+    toggleTheme();
+    aggiornaLabelTema();
+  });
+
+  document.getElementById("btn-stampa-pubblico").addEventListener("click", () => stampaPDF(false));
+  document.getElementById("btn-stampa-interno").addEventListener("click", () => stampaPDF(true));
+
   if (sessionStorage.getItem(SESSION_KEY) === "1") {
     document.getElementById("gate").style.display = "none";
     avviaDopoPassword();
@@ -289,4 +303,41 @@ function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+// ---------- Stampa / esportazione PDF ----------
+// Usa la funzione di stampa del browser: nella finestra di stampa che si apre,
+// scegliendo come stampante "Salva come PDF" si ottiene un file PDF pronto.
+
+function stampaPDF(conQuantita) {
+  if (!VINI || VINI.length === 0) {
+    mostraToast("Nessun vino da stampare.");
+    return;
+  }
+
+  const gruppi = raggruppaPerTipo(ordinaPerTipo(VINI));
+  const oggi = new Date().toLocaleDateString("it-IT");
+
+  let html = `<div class="print-title">Bar Garda — Carta dei vini</div>`;
+  html += `<div class="print-sub">${conQuantita ? "Uso interno · con quantità in cantina · " : ""}${oggi}</div>`;
+
+  TIPI_ORDINE.forEach(tipo => {
+    const lista = gruppi[tipo];
+    if (!lista || lista.length === 0) return;
+    html += `<div class="print-group">${tipo}</div>`;
+    lista.forEach(v => {
+      const esaurito = Number(v.quantita) <= 0;
+      const etichettaQty = conQuantita
+        ? `<span class="qty">${esaurito ? "esaurito" : v.quantita + " pz"}</span>`
+        : (esaurito ? `<span class="qty">esaurito</span>` : "");
+      html += `
+        <div class="print-row">
+          <span>${escapeHtml(v.nome)}</span>
+          <span>${formattaPrezzo(v.prezzo)}${etichettaQty}</span>
+        </div>`;
+    });
+  });
+
+  document.getElementById("print-area").innerHTML = html;
+  window.print();
 }
