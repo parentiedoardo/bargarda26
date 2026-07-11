@@ -39,7 +39,7 @@ Questi dati restano salvati **solo nel browser di quel telefono** (localStorage)
 
 ## 3. Cambiare la password di gestione
 
-La password di default è **`GardaVinoBar26`**. Per cambiarla:
+La password di default è **`xxxxx`**. Per cambiarla:
 
 1. Apri `admin.html` nel browser del computer.
 2. Apri la Console sviluppatore (F12 o tasto destro → Ispeziona → Console).
