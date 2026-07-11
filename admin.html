@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enoteca — Gestione</title>
+<link rel="stylesheet" href="style.css">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<!-- Cancello password -->
+<div class="gate" id="gate">
+  <div class="card">
+    <h2>Area gestione</h2>
+    <p class="hint">Inserisci la password per accedere alla gestione della cantina.</p>
+    <label for="pwd">Password</label>
+    <input type="password" id="pwd" autocomplete="current-password" inputmode="text">
+    <button class="btn-primary" id="btn-entra">Entra</button>
+    <p class="hint" id="pwd-errore" style="color:var(--ink-red); display:none;">Password errata.</p>
+  </div>
+</div>
+
+<!-- Configurazione connessione GitHub (prima volta) -->
+<div class="gate" id="gh-setup" style="display:none;">
+  <div class="card">
+    <h2>Collega il repository</h2>
+    <p class="hint">Questi dati restano salvati solo su questo telefono/browser e servono per salvare le modifiche direttamente su GitHub.</p>
+    <label for="gh-owner">Utente/organizzazione GitHub</label>
+    <input type="text" id="gh-owner" placeholder="es. mario-bar">
+    <label for="gh-repo">Nome repository</label>
+    <input type="text" id="gh-repo" placeholder="es. enoteca-sito">
+    <label for="gh-branch">Branch</label>
+    <input type="text" id="gh-branch" placeholder="main" value="main">
+    <label for="gh-path">Percorso file dati</label>
+    <input type="text" id="gh-path" placeholder="data/wines.json" value="data/wines.json">
+    <label for="gh-token">Token GitHub (permesso di scrittura)</label>
+    <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    <button class="btn-primary" id="btn-salva-config">Salva e connetti</button>
+    <p class="hint" id="gh-errore" style="color:var(--ink-red); display:none;"></p>
+  </div>
+</div>
+
+<!-- App gestione -->
+<div class="wrap" id="app" style="display:none;">
+
+  <div class="admin-header">
+    <h1>Cantina</h1>
+    <a href="#" class="link-small" id="btn-disconnetti">Esci</a>
+  </div>
+
+  <nav class="filters" id="filters"></nav>
+
+  <div id="lista"></div>
+
+</div>
+
+<button class="fab" id="fab-aggiungi" style="display:none;" aria-label="Aggiungi vino">+</button>
+
+<!-- Foglio aggiunta nuovo vino -->
+<div class="sheet-backdrop" id="sheet-backdrop">
+  <div class="sheet">
+    <h3>Nuovo vino</h3>
+    <label for="f-tipo">Tipologia</label>
+    <select id="f-tipo">
+      <option value="Bianco">Bianco</option>
+      <option value="Bollicine">Bollicine</option>
+      <option value="Rosso">Rosso</option>
+    </select>
+    <label for="f-nome">Nome vino</label>
+    <input type="text" id="f-nome" placeholder="es. Sassicaia">
+    <div class="row-2">
+      <div>
+        <label for="f-prezzo">Prezzo (€)</label>
+        <input type="number" id="f-prezzo" min="0" step="0.5" placeholder="es. 12">
+      </div>
+      <div>
+        <label for="f-quantita">Bottiglie</label>
+        <input type="number" id="f-quantita" min="0" step="1" placeholder="es. 6">
+      </div>
+    </div>
+    <button class="btn-primary" id="btn-salva-vino">Aggiungi alla cantina</button>
+    <button class="btn-ghost" id="btn-annulla-vino" style="width:100%; margin-top:10px;">Annulla</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="common.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
