@@ -3,70 +3,70 @@
     "id": "w001",
     "tipo": "Bollicine",
     "nome": "Ferrari Brut",
-    "prezzo": 8.00,
+    "prezzo": 120,
     "quantita": 14
   },
   {
     "id": "w002",
     "tipo": "Bollicine",
     "nome": "Franciacorta Ca' del Bosco",
-    "prezzo": 12.00,
+    "prezzo": 12,
     "quantita": 0
   },
   {
     "id": "w003",
     "tipo": "Bollicine",
     "nome": "Prosecco Valdobbiadene DOCG",
-    "prezzo": 6.00,
+    "prezzo": 6,
     "quantita": 20
   },
   {
     "id": "w004",
     "tipo": "Bianco",
     "nome": "Gavi di Gavi",
-    "prezzo": 6.50,
+    "prezzo": 6.5,
     "quantita": 9
   },
   {
     "id": "w005",
     "tipo": "Bianco",
     "nome": "Vermentino di Sardegna",
-    "prezzo": 6.00,
+    "prezzo": 6,
     "quantita": 5
   },
   {
     "id": "w006",
     "tipo": "Bianco",
     "nome": "Lugana Doc",
-    "prezzo": 7.00,
+    "prezzo": 7,
     "quantita": 8
   },
   {
     "id": "w007",
     "tipo": "Bianco",
     "nome": "Pinot Grigio delle Venezie",
-    "prezzo": 5.50,
+    "prezzo": 5.5,
     "quantita": 0
   },
   {
     "id": "w008",
     "tipo": "Rosso",
     "nome": "Sassicaia",
-    "prezzo": 25.00,
+    "prezzo": 25,
     "quantita": 3
   },
   {
     "id": "w009",
     "tipo": "Rosso",
     "nome": "Chianti Classico",
-    "prezzo": 7.00,
+    "prezzo": 7,
     "quantita": 11
   },
   {
     "id": "w010",
     "tipo": "Rosso",
     "nome": "Amarone della Valpolicella",
-    "prezzo": 14.00,
+    "prezzo": 14,
     "quantita": 0
   }
 ]
