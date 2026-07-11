@@ -89,13 +89,20 @@ body {
   padding: 24px 18px 64px;
 }
 
-/* ---------- Cornice ---------- */
+/* ---------- Cornice ed emblema ---------- */
 .menu-frame {
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 26px 16px 18px;
   margin-bottom: 8px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 45%);
+}
+
+.brand-badge {
+  display: block;
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 6px;
 }
 
 /* ---------- Header ---------- */
@@ -353,6 +360,7 @@ button:active { transform: scale(0.97); }
   padding: 24px;
 }
 .gate .card { width: 100%; max-width: 360px; text-align: center; }
+.gate .brand-badge { width: 92px; height: 92px; }
 .gate h2 {
   font-family: var(--font-script);
   font-weight: 400;
