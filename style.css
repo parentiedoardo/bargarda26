@@ -503,6 +503,11 @@ button:active { transform: scale(0.97); }
 #print-area { display: none; }
 
 @media print {
+  html, body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #201a12 !important;
+  }
   body * { visibility: hidden; }
   #print-area, #print-area * { visibility: visible; }
   #print-area {
