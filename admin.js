@@ -56,6 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.removeItem(SESSION_KEY);
     location.reload();
   });
+  document.getElementById("btn-connessione").addEventListener("click", e => {
+    e.preventDefault();
+    if (confirm("Rivedere i dati di connessione a GitHub (utente, repository, branch, percorso, token)?")) {
+      apriSetupConnessione();
+    }
+  });
 
   document.getElementById("fab-aggiungi").addEventListener("click", () => apriSheet(null));
   document.getElementById("btn-annulla-vino").addEventListener("click", chiudiSheet);
@@ -91,13 +97,31 @@ function avviaDopoPassword() {
   connettiEcarica(config);
 }
 
+function apriSetupConnessione() {
+  const config = getGhConfig() || {};
+  document.getElementById("app").style.display = "none";
+  document.getElementById("fab-aggiungi").style.display = "none";
+  document.getElementById("gh-owner").value = config.owner || "";
+  document.getElementById("gh-repo").value = config.repo || "";
+  document.getElementById("gh-branch").value = config.branch || "main";
+  document.getElementById("gh-path").value = config.path || "data/wines.json";
+  document.getElementById("gh-token").value = "";
+  document.getElementById("gh-token").placeholder = config.token
+    ? "Lascia vuoto per mantenere il token attuale"
+    : "ghp_xxxxxxxxxxxx";
+  document.getElementById("gh-errore").style.display = "none";
+  document.getElementById("gh-setup").style.display = "flex";
+}
+
 async function salvaConfigGithub() {
+  const esistente = getGhConfig() || {};
+  const tokenInserito = document.getElementById("gh-token").value.trim();
   const config = {
     owner: document.getElementById("gh-owner").value.trim(),
     repo: document.getElementById("gh-repo").value.trim(),
     branch: document.getElementById("gh-branch").value.trim() || "main",
     path: document.getElementById("gh-path").value.trim() || "data/wines.json",
-    token: document.getElementById("gh-token").value.trim()
+    token: tokenInserito || esistente.token || ""
   };
   const err = document.getElementById("gh-errore");
   err.style.display = "none";
@@ -133,6 +157,9 @@ async function ricaricaDaGithub() {
   } catch (e) {
     mostraToast("Errore: " + e.message);
     return;
+  }
+  if (store.notFound) {
+    mostraToast(`File non trovato: ${store.owner}/${store.repo} (${store.branch}) → ${store.path}. Controlla la connessione.`, 6000);
   }
   renderFiltri();
   renderLista();
@@ -291,12 +318,12 @@ async function salvaSuGithub(messaggio) {
 
 // ---------- Utilità ----------
 
-function mostraToast(msg) {
+function mostraToast(msg, durataMs) {
   const t = document.getElementById("toast");
   t.textContent = msg;
   t.classList.add("show");
   clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  window._toastTimer = setTimeout(() => t.classList.remove("show"), durataMs || 2200);
 }
 
 function escapeHtml(str) {

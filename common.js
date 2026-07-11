@@ -120,8 +120,10 @@ class GitHubDataStore {
     const res = await fetch(this._url(), { headers: this._headers(), cache: "no-store" });
     if (res.status === 404) {
       this._lastSha = null;
+      this.notFound = true;
       return [];
     }
+    this.notFound = false;
     if (!res.ok) {
       throw new Error(await this._readError(res));
     }
